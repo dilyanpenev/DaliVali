@@ -1,4 +1,5 @@
 <StartPage>:
+    id: start
     city: city_input
     FloatLayout:
         BackgroundColor:
@@ -35,10 +36,6 @@
     background_normal: ''
     background_color: 0.5, 0.1, 0.1, 1
 
-<InfoPage>:
-    Label:
-        id: smth
-
 <RVPage>:
     BoxLayout:
         orientation: "vertical"
@@ -50,6 +47,19 @@
             size_hint: None, None
             size: 150, 50
             on_release: root.manager.current = root.manager.previous()
+
+<InfoPage>:
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            id: city
+        Label:
+            id: status
+        Button:
+            text: 'New search'
+            size_hint: None, None
+            size: 150, 50
+            on_release: root.manager.current = 'start'
 
 <BackgroundColor@Widget>
     background_color: 0, 0, 0, 1

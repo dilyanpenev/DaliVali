@@ -1,7 +1,7 @@
 from kivy.app import App
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.properties import ObjectProperty
-from weather_forcaster import CitySearch
+from weather_forcaster import CitySearch, get_remaining_hours
 from kivy.uix.recycleview import RecycleView
 from kivy.uix.button import Button
 
@@ -30,10 +30,10 @@ class CityButton(Button):
 
     def on_release(self):
         cs = CitySearch()
-        weather_status = cs.get_weather_status(self.text.split(', '))
+        weather_status = cs.get_weather_status(self.text.split(', '), get_remaining_hours())
         App.get_running_app().root.current = 'info'
-        App.get_running_app().root.screens[2].ids.smth.text = weather_status
-
+        App.get_running_app().root.screens[2].ids.city.text = self.text
+        App.get_running_app().root.screens[2].ids.status.text = weather_status
 
 
 class RVPage(Screen):
