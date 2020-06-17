@@ -13,6 +13,7 @@ class StartPage(Screen):
         cs = CitySearch()
         rv_list = cs.search_city(self.city.text)
         self.manager.screens[1].ids.search_res.data = rv_list
+        self.manager.current = 'rvpage'
 
     def delete_prompt(self):
         if self.city.text == 'Enter city name':
@@ -30,7 +31,7 @@ class CityButton(Button):
 
     def on_release(self):
         cs = CitySearch()
-        weather_status = cs.get_weather_status(self.text.split(', '), get_remaining_hours())
+        weather_status = cs.get_weather_advice(self.text.split(', '), get_remaining_hours())
         App.get_running_app().root.current = 'info'
         App.get_running_app().root.screens[2].ids.city.text = self.text
         App.get_running_app().root.screens[2].ids.status.text = weather_status

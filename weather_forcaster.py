@@ -18,7 +18,7 @@ class CitySearch:
         rv_dict = [{'text': str(name + ', ' + country)} for cityid, name, country in results]
         return rv_dict
 
-    def get_weather_status(self, city_details, hour_range):
+    def get_weather_advice(self, city_details, hour_range):
         city_name = city_details[0]
         country_name = city_details[1]
         location = self.reg.locations_for(city_name, country=country_name)

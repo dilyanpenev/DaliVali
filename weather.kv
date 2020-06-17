@@ -5,7 +5,7 @@
         BackgroundColor:
             background_color: 0.7, 1, 0.51, 0.4
         BackgroundLabel:
-            text: "Dali Vali"
+            text: "DaliVali"
             pos_hint: {'x': 0.16, 'y':0.65}
             size_hint: (0.68, 0.25)
             background_color: 0.5, 0.1, 0.1, 1
@@ -15,12 +15,23 @@
             multiline: False
             size_hint: (0.6, None)
             text: 'Enter city name'
-            height: 30
+            height: 35
+            font_size: 20
             pos_hint: {'x': 0.2, 'y':0.25}
             on_text_validate:
                 root.submit_city()
-                root.manager.current = root.manager.next()
             on_touch_down: root.delete_prompt()
+        Button:
+            on_release:
+                if root.ids.city_input.text != 'Enter city name': \
+                root.submit_city()
+            text: 'Enter'
+            background_normal: ''
+            background_color: 0.2, 0.6, 0.2, 1
+            size_hint: (0.6, 0.075)
+            font_size: 20
+            pos_hint: {'x': 0.2, 'y':0.17}
+
 
 <RV>:
     viewclass: 'CityButton'
