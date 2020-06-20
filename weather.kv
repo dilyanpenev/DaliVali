@@ -22,19 +22,20 @@
                 multiline: False
                 text: 'Enter city name'
                 background_color: 0.87, 1, 0.97, 1
-                font_size: 20
+                font_size: 18
                 halign: 'center'
                 on_text_validate:
                     root.submit_city()
                 on_touch_down: root.delete_prompt()
             Button:
                 on_release:
+                    root.manager.transition.direction = 'left'
                     if root.ids.city_input.text != 'Enter city name': \
                     root.submit_city()
                 text: 'Enter'
                 background_normal: ''
                 background_color: 0.46, 0.37, 0.26, 1
-                font_size: 20
+                font_size: 18
 
 
 <RV>:
@@ -51,32 +52,58 @@
 
 <CityButton>:
     background_normal: ''
-    background_color: 0.5, 0.1, 0.1, 1
+    background_color: 0.7, 0.36, 0.20, 1
+    font_size: 18
 
 <RVPage>:
-    BoxLayout:
-        orientation: "vertical"
-        RV:
-            id: search_res
-            pos_hint: {'x': 0.1}
-        Button:
-            text: 'New search'
-            size_hint: None, None
-            size: 150, 50
-            on_release: root.manager.current = root.manager.previous()
+    FloatLayout:
+        BackgroundColor:
+            background_color: 0.33, 0.28, 0.44, 1
+        CanvasWidget:
+            size_hint: (0.95, 0.95)
+            pos_hint: {'x': 0.025, 'y':0.025}
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            size_hint: (0.85, 0.85)
+            pos_hint: {'x': 0.075, 'y':0.075}
+            RV:
+                id: search_res
+                pos_hint: {'x': 0.1}
+            Button:
+                text: 'New search'
+                size_hint: None, None
+                font_size: 18
+                size: 150, 50
+                background_normal: ''
+                background_color: 0.46, 0.37, 0.26, 1
+                on_release:
+                    root.manager.current = 'start'
+                    root.manager.transition.direction = 'right'
 
 <InfoPage>:
-    BoxLayout:
-        orientation: "vertical"
-        Label:
-            id: city
-        Label:
-            id: status
-        Button:
-            text: 'New search'
-            size_hint: None, None
-            size: 150, 50
-            on_release: root.manager.current = 'start'
+    FloatLayout:
+        BackgroundColor:
+            background_color: 0.33, 0.28, 0.44, 1
+        CanvasWidget:
+            size_hint: (0.95, 0.95)
+            pos_hint: {'x': 0.025, 'y':0.025}
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                id: city
+            Label:
+                id: status
+            Button:
+                text: 'New search'
+                font_size: 18
+                size_hint: None, None
+                size: 150, 50
+                background_normal: ''
+                background_color: 0.46, 0.37, 0.26, 1
+                on_release:
+                    root.manager.current = 'start'
+                    root.manager.transition.direction = 'right'
 
 <BackgroundColor@Widget>
     background_color: 0, 0, 0, 1

@@ -13,14 +13,18 @@ def calculate_rain_chance(status_list, rain_list, hour_range):
         next_rain = None
         for no, status in enumerate(status_list):
             if status == 'Rain':
-                if rain_list[no].get('1h') <= 0.5 and advice < 2:
+                if rain_list[no].get('1h') <= 1 and advice < 2:
                     advice = 1
                 elif rain_list[no].get('1h') <= 2.5 and advice < 3:
                     advice = 2
+                    if next_rain is None:
+                        next_rain = no
                 else:
                     advice = 3
-                if next_rain is None:
-                    next_rain = no
+                    if next_rain is None:
+                        next_rain = no
+        if next_rain is None:
+            next_rain = status_list.index('Rain')
         if advice == 1:
             advice = 'Nothing more than a drizzle today.'
         elif advice == 2:
@@ -64,5 +68,7 @@ class CitySearch:
         one_call = self.mgr.one_call(location.lat, location.lon)
         status_forecast = [one_call.forecast_hourly[i].status for i in range(hour_range)]
         rain_forecast = [one_call.forecast_hourly[i].rain for i in range(hour_range)]
+        # print(status_forecast)
+        # print(rain_forecast)
         advice = calculate_rain_chance(status_forecast, rain_forecast, hour_range)
         return advice
