@@ -73,7 +73,7 @@
             Button:
                 text: 'New search'
                 size_hint: None, None
-                font_size: 18
+                font_size: 17
                 size: 150, 50
                 background_normal: ''
                 background_color: 0.46, 0.37, 0.26, 1
@@ -88,17 +88,30 @@
         CanvasWidget:
             size_hint: (0.95, 0.95)
             pos_hint: {'x': 0.025, 'y':0.025}
-        BoxLayout:
+        FloatLayout:
             orientation: "vertical"
+            size_hint: (0.85, 0.85)
+            pos_hint: {'x': 0.075, 'y':0.075}
             Label:
                 id: city
+                font_size: 35
+                bold: True
+                halign: 'left'
+                size_hint: (0.3, 0.2)
+                pos_hint: {'x': 0, 'y': 0.8}
             Label:
                 id: status
+                halign: 'center'
+                font_size: 18
+                size_hint: (0.7, 0.4)
+                pos_hint: {'x': 0.15, 'y': 0.5}
+                text_size: self.size
             Button:
                 text: 'New search'
-                font_size: 18
+                font_size: 17
                 size_hint: None, None
                 size: 150, 50
+                pos_hint: {'x': 0.005, 'y':0.005}
                 background_normal: ''
                 background_color: 0.46, 0.37, 0.26, 1
                 on_release:

@@ -32,11 +32,11 @@ def calculate_rain_chance(status_list, rain_list, hour_range):
         else:
             advice = 'It\'s not a good idea to go out. Heavy rain is coming.'
         if next_rain == 0:
-            advice += ' It\'s probably raining right now.'
+            advice += '\nIt\'s probably raining right now.'
         elif next_rain == 1:
-            advice += ' It\'s going to rain in 1 hour'
+            advice += '\nIt\'s going to rain in 1 hour'
         else:
-            advice += ' It\'s going to rain in ' + str(next_rain) + ' hours'
+            advice += '\nIt\'s going to rain in ' + str(next_rain) + ' hours'
     elif 'Clear' in status_list:
         is_sunny = 24 - hour_range + status_list.index('Clear')
         if 6 <= is_sunny <= 18:
