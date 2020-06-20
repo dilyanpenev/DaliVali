@@ -3,7 +3,10 @@
     city: city_input
     FloatLayout:
         BackgroundColor:
-            background_color: 0.2, 0.2, 0.8, 1
+            background_color: 0.33, 0.28, 0.44, 1
+        CanvasWidget:
+            size_hint: (0.95, 0.95)
+            pos_hint: {'x': 0.025, 'y':0.025}
         Image:
             source: 'images\DV_logo.png'
             pos_hint: {'x': 0, 'y':0.2}
@@ -11,13 +14,14 @@
         BoxLayout:
             orientation: "vertical"
             size_hint: (0.6, None)
-            pos_hint: {'x': 0.2, 'y':0.25}
+            pos_hint: {'x': 0.2, 'y':0.2}
             height: 70
             spacing: 2
             TextInput:
                 id: city_input
                 multiline: False
                 text: 'Enter city name'
+                background_color: 0.87, 1, 0.97, 1
                 font_size: 20
                 halign: 'center'
                 on_text_validate:
@@ -29,12 +33,14 @@
                     root.submit_city()
                 text: 'Enter'
                 background_normal: ''
-                background_color: 0.2, 0.6, 0.2, 1
+                background_color: 0.46, 0.37, 0.26, 1
                 font_size: 20
 
 
 <RV>:
     viewclass: 'CityButton'
+    scroll_type: ['content']
+    do_scroll_y: True
     RecycleBoxLayout:
         default_size: None, dp(56)
         default_size_hint: 1, None
@@ -83,3 +89,11 @@
 
 <BackgroundLabel@Label+BackgroundColor>
     background_color: 0, 0, 0, 1
+
+<CanvasWidget@Widget>:
+    canvas:
+        Color:
+            rgba: 0.38, 0.56, 0.76, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
