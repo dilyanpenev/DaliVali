@@ -53,6 +53,7 @@ class CitySearch:
         self.owm = OWM('246384c9beadbdc4eb18ced4c193e0ae')
         self.reg = self.owm.city_id_registry()
         self.mgr = self.owm.weather_manager()
+        self.one_call = None
 
     def search_city(self, search_word):
         results = self.reg.ids_for(search_word)
@@ -65,10 +66,26 @@ class CitySearch:
         location = self.reg.locations_for(city_name, country=country_name)
         if isinstance(location, list):
             location = location[0]
-        one_call = self.mgr.one_call(location.lat, location.lon)
-        status_forecast = [one_call.forecast_hourly[i].status for i in range(hour_range)]
-        rain_forecast = [one_call.forecast_hourly[i].rain for i in range(hour_range)]
-        # print(status_forecast)
-        # print(rain_forecast)
+        self.one_call = self.mgr.one_call(location.lat, location.lon)
+        status_forecast = [self.one_call.forecast_hourly[i].status for i in range(hour_range)]
+        rain_forecast = [self.one_call.forecast_hourly[i].rain for i in range(hour_range)]
+        print(status_forecast)
+        print(rain_forecast)
         advice = calculate_rain_chance(status_forecast, rain_forecast, hour_range)
         return advice
+
+    def get_temperatures(self):
+        temp_3h = [self.one_call.forecast_hourly[i].temperature('celsius') for i in range(0, 13, 3)]
+        status_3h = [self.one_call.forecast_hourly[i].status for i in range(0, 13, 3)]
+        icon_paths = []
+        for status in status_3h:
+            if status == 'Clear':
+                icon_paths.append('images\\sun.png')
+            elif status == 'Clouds':
+                icon_paths.append('images\\clouds.png')
+            elif status == 'Rain':
+                icon_paths.append('images\\rain.png')
+            else:
+                icon_paths.append('images\\snow.png')
+        print(list(zip(icon_paths, temp_3h)))
+        return list(zip(icon_paths, temp_3h))
